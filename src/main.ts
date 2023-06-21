@@ -31,19 +31,25 @@ export const onNavigate = (pathname:string) => {
     window.location.origin + pathname, //window pantalla principal// location de obtiene donde esta lo original a la nueva  
     // patheme a la nueva ruta parametro
   );
-  root.removeChild(root.firstChild);
 
-  //root.appendChild(routes[pathname]()); //ejecuta la funcion
+  if((typeof root) ===null){
+    return 
+  }
+  root?.removeChild(root?.firstChild);
+
+  //root.appenChild(routes[pathname]()); //ejecuta la funcion
   const indexOfPath = Object.values(Rutas).indexOf(pathname as string as Rutas); 
   const key = Object.keys(Rutas)[indexOfPath]
-  root.appendChild(key); //ejecuta la funcion
+  root?.appendChild(key); //ejecuta la funcion
 };
 
-const component = routes[window.location.pathname];
+const indexOfPath = Object.values(Rutas).indexOf(window.location.pathname as string as Rutas); 
+  
+const component =  Object.keys(Rutas)[indexOfPath];
 
 window.onpopstate = () => {
-  root.removeChild(root.firstChild);
-  root.append(component());
+  root?.removeChild(root?.firstChild);
+  root?.append(component());
 };
 
 onAuthStateChanged(auth, (user) => {
